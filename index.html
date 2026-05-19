@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel PRD Palace | Luxury Hotel in Saharsa</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Framer Motion -->
+  <script src="https://unpkg.com/framer-motion@10.12.16/dist/framer-motion.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0A192F;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .gold-gradient {
+      background: linear-gradient(135deg, #D4AF37, #f7d774);
+    }
+
+    .room-card:hover .room-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .room-overlay {
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .hero-bg {
+      background:
+      linear-gradient(to bottom, rgba(10,25,47,0.7), rgba(10,25,47,0.9)),
+      url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .sticky-nav {
+      background: rgba(10,25,47,0.75);
+      backdrop-filter: blur(16px);
+    }
+
+    .testimonial-slide {
+      animation: slide 18s infinite;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(0); }
+
+      25% { transform: translateX(-100%); }
+      45% { transform: translateX(-100%); }
+
+      50% { transform: translateX(-200%); }
+      70% { transform: translateX(-200%); }
+
+      75% { transform: translateX(-300%); }
+      95% { transform: translateX(-300%); }
+
+      100% { transform: translateX(0); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-wide">
+          PRD Palace
+        </h1>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#about" class="hover:text-[#D4AF37] transition">About</a>
+        <a href="#rooms" class="hover:text-[#D4AF37] transition">Rooms</a>
+        <a href="#amenities" class="hover:text-[#D4AF37] transition">Amenities</a>
+        <a href="#testimonials" class="hover:text-[#D4AF37] transition">Reviews</a>
+        <a href="#contact" class="hover:text-[#D4AF37] transition">Contact</a>
+      </nav>
+
+      <button class="md:hidden" id="menuBtn">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden glass mx-4 rounded-2xl p-6 md:hidden">
+      <div class="flex flex-col gap-5 text-center">
+        <a href="#about">About</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#amenities">Amenities</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-bg min-h-screen flex flex-col justify-center relative px-6">
+
+    <div class="max-w-5xl mx-auto text-center">
+
+      <p class="uppercase tracking-[8px] text-[#D4AF37] text-sm mb-5">
+        Luxury • Elegance • Heritage
+      </p>
+
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+        A Legacy of Vision,
+        <br>
+        A Tradition of Excellence.
+      </h1>
+
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+        Experience 4-Star Premium Hospitality in the Heart of Saharsa.
+      </p>
+
+    </div>
+
+    <!-- Booking Bar -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass rounded-3xl p-5">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+
+        <div>
+          <label class="text-sm text-gray-300">Check-In</label>
+          <input type="date" class="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 mt-2 outline-none">
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-300">Check-Out</label>
+          <input type="date" class="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 mt-2 outline-none">
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-300">Guests</label>
+          <select class="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 mt-2 outline-none">
+            <option class="text-black">1 Guest</option>
+            <option class="text-black">2 Guests</option>
+            <option class="text-black">3 Guests</option>
+            <option class="text-black">4 Guests</option>
+          </select>
+        </div>
+
+        <button class="gold-gradient text-black font-semibold py-4 rounded-2xl mt-6 md:mt-0 hover:scale-105 transition-all duration-300 shadow-2xl">
+          Check Availability
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-24 px-6 bg-[#081423]">
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+
+      <div>
+
+        <p class="text-[#D4AF37] uppercase tracking-[5px] mb-4">
+          Our Story
+        </p>
+
+        <h2 class="text-4xl md:text-5xl font-bold mb-8">
+          Hospitality Rooted in Heritage
+        </h2>
+
+        <p class="text-gray-300 leading-8 text-lg">
+          Named in honor of Shri Prahlad Rai Didwania,
+          Hotel PRD Palace brings world-class luxury and deep-rooted
+          hospitality to Saharsa. Founded by the Didwania brothers,
+          our mission is to provide premium, metropolitan-level comfort
+          without leaving the region.
+        </p>
+
+      </div>
+
+      <div class="grid grid-cols-2 gap-5">
+
+        <img
+          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop"
+          class="rounded-3xl h-[420px] object-cover"
+        >
+
+        <div class="flex flex-col gap-5">
+          <img
+            src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070&auto=format&fit=crop"
+            class="rounded-3xl h-[200px] object-cover"
+          >
+
+          <img
+            src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=2074&auto=format&fit=crop"
+            class="rounded-3xl h-[200px] object-cover"
+          >
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Rooms -->
+  <section id="rooms" class="py-24 px-6">
+
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <p class="text-[#D4AF37] uppercase tracking-[5px] mb-3">
+          Luxury Rooms
+        </p>
+
+        <h2 class="text-5xl font-bold">
+          Rooms & Suites
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Card -->
+        <div class="room-card relative overflow-hidden rounded-3xl group">
+
+          <img
+            src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=2074&auto=format&fit=crop"
+            class="h-[500px] w-full object-cover"
+          >
+
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+          <div class="absolute bottom-0 p-8">
+            <h3 class="text-3xl font-bold mb-2">Palace Suite</h3>
+            <p class="text-gray-300 mb-5">
+              Spacious, King Bed, Premium City View
+            </p>
+
+            <div class="flex gap-4 text-sm text-gray-300">
+              <span class="flex items-center gap-2">
+                <i data-lucide="wifi"></i> Wi-Fi
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i data-lucide="snowflake"></i> AC
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i data-lucide="coffee"></i> Tea/Coffee
+              </span>
+            </div>
+
+            <div class="room-overlay mt-8">
+              <button class="gold-gradient text-black font-semibold px-6 py-3 rounded-xl">
+                Book Now
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Card -->
+        <div class="room-card relative overflow-hidden rounded-3xl group">
+
+          <img
+            src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1974&auto=format&fit=crop"
+            class="h-[500px] w-full object-cover"
+          >
+
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+          <div class="absolute bottom-0 p-8">
+            <h3 class="text-3xl font-bold mb-2">Premium Twin Room</h3>
+
+            <div class="flex gap-4 text-sm text-gray-300 mt-4">
+              <span class="flex items-center gap-2">
+                <i data-lucide="wifi"></i> Wi-Fi
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i data-lucide="snowflake"></i> AC
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i data-lucide="coffee"></i> Tea/Coffee
+              </span>
+            </div>
+
+            <div class="room-overlay mt-8">
+              <button class="gold-gradient text-black font-semibold px-6 py-3 rounded-xl">
+                Book Now
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Card -->
+        <div class="room-card relative overflow-hidden rounded-3xl group">
+
+          <img
+            src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=2070&auto=format&fit=crop"
+            class="h-[500px] w-full object-cover"
+          >
+
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+          <div class="absolute bottom-0 p-8">
+            <h3 class="text-3xl font-bold mb-2">Comfort Room</h3>
+
+            <div class="flex gap-4 text-sm text-gray-300 mt-4">
+              <span class="flex items-center gap-2">
+                <i data-lucide="wifi"></i> Wi-Fi
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i data-lucide="snowflake"></i> AC
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i data-lucide="coffee"></i> Tea/Coffee
+              </span>
+            </div>
+
+            <div class="room-overlay mt-8">
+              <button class="gold-gradient text-black font-semibold px-6 py-3 rounded-xl">
+                Book Now
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Amenities -->
+  <section id="amenities" class="py-24 px-6 bg-[#081423]">
+
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <p class="text-[#D4AF37] uppercase tracking-[5px] mb-3">
+          Facilities
+        </p>
+
+        <h2 class="text-5xl font-bold">
+          World-Class Amenities
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+
+        <div class="glass rounded-3xl p-10 text-center hover:scale-105 transition">
+          <i data-lucide="sparkles" class="mx-auto mb-5 text-[#D4AF37]"></i>
+          <h3 class="text-xl font-semibold">Spa & Wellness</h3>
+        </div>
+
+        <div class="glass rounded-3xl p-10 text-center hover:scale-105 transition">
+          <i data-lucide="dumbbell" class="mx-auto mb-5 text-[#D4AF37]"></i>
+          <h3 class="text-xl font-semibold">Fully Equipped Gym</h3>
+        </div>
+
+        <div class="glass rounded-3xl p-10 text-center hover:scale-105 transition">
+          <i data-lucide="utensils-crossed" class="mx-auto mb-5 text-[#D4AF37]"></i>
+          <h3 class="text-xl font-semibold">Fine Dining</h3>
+        </div>
+
+        <div class="glass rounded-3xl p-10 text-center hover:scale-105 transition">
+          <i data-lucide="wine" class="mx-auto mb-5 text-[#D4AF37]"></i>
+          <h3 class="text-xl font-semibold">Premium Bar</h3>
+        </div>
+
+        <div class="glass rounded-3xl p-10 text-center hover:scale-105 transition">
+          <i data-lucide="building-2" class="mx-auto mb-5 text-[#D4AF37]"></i>
+          <h3 class="text-xl font-semibold">Banquet Hall</h3>
+        </div>
+
+        <div class="glass rounded-3xl p-10 text-center hover:scale-105 transition">
+          <i data-lucide="bell-ring" class="mx-auto mb-5 text-[#D4AF37]"></i>
+          <h3 class="text-xl font-semibold">24/7 Room Service</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-24 overflow-hidden">
+
+    <div class="text-center mb-16">
+      <p class="text-[#D4AF37] uppercase tracking-[5px] mb-3">
+        Guest Reviews
+      </p>
+
+      <h2 class="text-5xl font-bold">
+        What Our Guests Say
+      </h2>
+    </div>
+
+    <div class="relative overflow-hidden">
+
+      <div class="testimonial-slide flex w-[400%]">
+
+        <!-- Review -->
+        <div class="w-full px-6">
+          <div class="glass rounded-3xl p-10 max-w-3xl mx-auto text-center">
+            <p class="text-xl leading-9 text-gray-300">
+              “Absolutely pristine rooms and premium hospitality.
+              Felt like a metro-city luxury hotel right in Saharsa.”
+            </p>
+            <h4 class="mt-6 text-[#D4AF37] font-semibold">
+              ★★★★★
+            </h4>
+          </div>
+        </div>
+
+        <div class="w-full px-6">
+          <div class="glass rounded-3xl p-10 max-w-3xl mx-auto text-center">
+            <p class="text-xl leading-9 text-gray-300">
+              “Exceptional staff, elegant interiors and perfect central location.”
+            </p>
+            <h4 class="mt-6 text-[#D4AF37] font-semibold">
+              ★★★★★
+            </h4>
+          </div>
+        </div>
+
+        <div class="w-full px-6">
+          <div class="glass rounded-3xl p-10 max-w-3xl mx-auto text-center">
+            <p class="text-xl leading-9 text-gray-300">
+              “One of the finest luxury experiences in Bihar.
+              Highly recommended for families and business stays.”
+            </p>
+            <h4 class="mt-6 text-[#D4AF37] font-semibold">
+              ★★★★★
+            </h4>
+          </div>
+        </div>
+
+        <div class="w-full px-6">
+          <div class="glass rounded-3xl p-10 max-w-3xl mx-auto text-center">
+            <p class="text-xl leading-9 text-gray-300">
+              “Loved the ambience, banquet facilities, and room service quality.”
+            </p>
+            <h4 class="mt-6 text-[#D4AF37] font-semibold">
+              ★★★★★
+            </h4>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-[#081423] py-20 px-6">
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-14">
+
+      <div>
+
+        <h2 class="text-3xl font-bold mb-6">
+          Hotel PRD Palace
+        </h2>
+
+        <p class="text-gray-300 leading-8">
+          VIP Road, Opposite Bank of Baroda,
+          Ward Number 30, Sant Nagar,
+          Saharsa, Bihar 852201
+        </p>
+
+        <p class="mt-4 text-[#D4AF37]">
+          Just 9 minutes from Saharsa Junction
+        </p>
+
+      </div>
+
+      <div>
+
+        <h3 class="text-2xl font-semibold mb-6">
+          Contact
+        </h3>
+
+        <div class="space-y-4 text-gray-300">
+          <p>+91 98765 43210</p>
+          <p>reservations@prdpalace.com</p>
+        </div>
+
+        <div class="flex gap-5 mt-6">
+          <i data-lucide="instagram"></i>
+          <i data-lucide="facebook"></i>
+          <i data-lucide="twitter"></i>
+        </div>
+
+      </div>
+
+      <div>
+
+        <h3 class="text-2xl font-semibold mb-6">
+          Location
+        </h3>
+
+        <div class="rounded-3xl overflow-hidden h-[220px]">
+          <img
+            src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2069&auto=format&fit=crop"
+            class="w-full h-full object-cover"
+          >
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="border-t border-white/10 mt-16 pt-8 text-center text-gray-400 text-sm">
+      © 2026 Hotel PRD Palace. All Rights Reserved.
+    </div>
+
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+
+    lucide.createIcons();
+
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50){
+        navbar.classList.add('sticky-nav');
+      } else {
+        navbar.classList.remove('sticky-nav');
+      }
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+  </script>
+
+</body>
+</html>
